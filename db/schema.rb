@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_232548) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.string "password_digest"
   end
 
   create_table "viewing_parties", force: :cascade do |t|
