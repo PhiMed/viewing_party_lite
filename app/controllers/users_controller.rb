@@ -1,8 +1,9 @@
 # frozen_string_literal: true
-require 'faraday'
 
 class UsersController < ApplicationController
   def new; end
+
+  include BCrypt
 
   def show
     @user = User.find(params[:id])
@@ -10,6 +11,8 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
+    user.password_digest = BCrypt::Password.create(params[:password])
+
     if user.save
       redirect_to "/users/#{user.id}"
     else
