@@ -6,6 +6,9 @@ RSpec.describe User, type: :model do
   describe 'relationships' do
     it { should have_many :user_parties }
     it { should have_many(:viewing_parties).through(:user_parties) }
+    it { should validate_uniqueness_of(:email)}
+    it { should validate_presence_of(:password_digest)}
+    it { should have_secure_password}
   end
 
   describe 'class methods' do
@@ -17,5 +20,4 @@ RSpec.describe User, type: :model do
 
       expect(User.all_but_current(user_1)).to eq([user_2, user_3, user_4])
     end
-  end
 end
